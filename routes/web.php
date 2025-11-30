@@ -25,7 +25,12 @@ Route::get('/', function () {
 // ---------- DASHBOARD ----------
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware('auth')
+    ->middleware('auth')
     ->name('dashboard');
+
+Route::get('/admin/dashboard', [App\Http\Controllers\AdminDashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('admin.dashboard');
 
 // ---------- CRUD DAN HANYA BISA DIAKSES SETELAH LOGIN ----------
 Route::middleware('auth')->group(function () {
