@@ -18,4 +18,9 @@ class DashboardController extends Controller
             'obat'   => Obat::count(),
         ]);
     }
+
+    public function userAccount()
+    {
+        return view('user.account');
+    }
 }

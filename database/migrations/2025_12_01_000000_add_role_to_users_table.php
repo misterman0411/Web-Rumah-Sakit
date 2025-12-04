@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('role')->default('user')->after('email');
+            $table->string('phone_number')->nullable()->after('role');
+            $table->string('nik')->nullable()->after('phone_number');
         });
     }
 

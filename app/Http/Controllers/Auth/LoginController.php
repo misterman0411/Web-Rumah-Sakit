@@ -30,8 +30,7 @@ class LoginController extends Controller
                 return redirect()->intended('/admin/dashboard');
             }
 
-            return redirect()->intended('/dashboard');
-        }
+            return redirect()->intended('/');        }
 
         return back()->withErrors([
             'email' => 'Email atau password salah',

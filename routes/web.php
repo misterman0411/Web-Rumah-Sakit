@@ -18,15 +18,19 @@ Route::post('/register', [RegisterController::class, 'register'])->middleware('g
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 // ---------- HALAMAN UTAMA ----------
+// ---------- HALAMAN UTAMA ----------
 Route::get('/', function () {
-    return redirect('/dashboard');
+    return view('welcome');
 });
 
 // ---------- DASHBOARD ----------
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware('auth')
-    ->middleware('auth')
     ->name('dashboard');
+
+Route::get('/user/account', [DashboardController::class, 'userAccount'])
+    ->middleware('auth')
+    ->name('user.account');
 
 Route::get('/admin/dashboard', [App\Http\Controllers\AdminDashboardController::class, 'index'])
     ->middleware(['auth'])
@@ -37,6 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('pasien', PasienController::class);
     Route::resource('dokter', DokterController::class);
     Route::resource('pegawai', PegawaiController::class);
+
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 // ---------- JANGAN PAKAI Auth::routes() (hapus total) ----------
